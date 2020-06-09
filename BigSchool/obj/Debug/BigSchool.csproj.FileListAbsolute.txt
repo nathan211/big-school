@@ -110,3 +110,4 @@ D:\Web\Projects\BigSchool\BigSchool\obj\Debug\BigSchool.csproj.GenerateResource.
 D:\Web\Projects\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.CreateTableCourse.resources
 D:\Web\Projects\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.PopulateCategoryTable.resources
 D:\Web\Projects\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.UpdateApplicationUser.resources
+D:\Web\Projects\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.AddNameColumnToApplicationUser.resources

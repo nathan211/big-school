@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Attendance.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -189,6 +190,10 @@
     <Compile Include="Migrations\202006020316384_UpdateApplicationUser.cs" />
     <Compile Include="Migrations\202006020316384_UpdateApplicationUser.Designer.cs">
       <DependentUpon>202006020316384_UpdateApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006090152170_AddNameColumnToApplicationUser.cs" />
+    <Compile Include="Migrations\202006090152170_AddNameColumnToApplicationUser.Designer.cs">
+      <DependentUpon>202006090152170_AddNameColumnToApplicationUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -289,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006020316384_UpdateApplicationUser.resx">
       <DependentUpon>202006020316384_UpdateApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006090152170_AddNameColumnToApplicationUser.resx">
+      <DependentUpon>202006090152170_AddNameColumnToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
