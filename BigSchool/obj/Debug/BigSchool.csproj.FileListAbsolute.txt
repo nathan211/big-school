@@ -118,3 +118,4 @@ D:\Web\Projects\BigSchool\BigSchool\bin\System.Web.Http.WebHost.dll
 D:\Web\Projects\BigSchool\BigSchool\bin\System.Net.Http.Formatting.xml
 D:\Web\Projects\BigSchool\BigSchool\bin\System.Web.Http.xml
 D:\Web\Projects\BigSchool\BigSchool\bin\System.Web.Http.WebHost.xml
+D:\Web\Projects\BigSchool\BigSchool\obj\Debug\BigSchool.Migrations.AddFollowingTable.resources

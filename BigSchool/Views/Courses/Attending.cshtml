@@ -4,7 +4,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<h1>The Big School</h1>
+<h1>Attending</h1>
 
 <div class="row">
 
@@ -34,10 +34,7 @@
                     <span class="category">
                         @course.Category.Name
                     </span>
-                    @if (Model.ShowAction)
-                    {
-                        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
-                    }
+                   
                 </div>
             </li>
         }
@@ -73,4 +70,6 @@
         </script>
     }
 </div>
+
+
 
