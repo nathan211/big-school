@@ -1,7 +1,9 @@
 ﻿@model BigSchool.ViewModels.CoursesViewModel
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Home Page";
+    var attendings = (IEnumerable<BigSchool.Models.Attendance>)ViewBag.Attendings;
 }
 
 <h1>The Big School</h1>
@@ -20,14 +22,13 @@
                         @course.DateTime.ToString("dd")
                     </div>
                 </div>
-
                 <div class="details">
                     <span class="lecturer">
                         @course.Lecturer.Name
                         @if (Model.ShowAction)
                         {
-                            <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
 
+                            <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
                         }
                     </span>
                     -
@@ -36,7 +37,20 @@
                     </span>
                     @if (Model.ShowAction)
                     {
-                        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        int check = 0;
+                        foreach (var item in attendings)
+                        {
+                            if (course.Id == item.CourseId && User.Identity.GetUserId() == item.AttendeeId)
+                            {
+                                <button data-course-id="@course.Id" class="btn btn-info btn-sm js-toggle-attendance">Going</button>
+                                check = 1;
+                                break;
+                            }
+                        }
+                        if (check == 0)
+                        {
+                            <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        }
                     }
                 </div>
             </li>

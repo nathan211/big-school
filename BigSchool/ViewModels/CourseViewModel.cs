@@ -24,11 +24,8 @@ namespace BigSchool.ViewModels
         {
             return DateTime.Parse(String.Format("{0} {1}", Date, Time));
         }
+        
 
-        public string Heading { get; set; }
-        public string Action
-        {
-            { return (Id != 0) ? "Update" : "Create"; }
-        }
+        
     }
 }

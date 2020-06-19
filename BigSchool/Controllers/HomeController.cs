@@ -29,6 +29,7 @@ namespace BigSchool.Controllers
                 UpcomingCourses = upcomingCourses,
                 ShowAction = User.Identity.IsAuthenticated
             };
+            ViewBag.Attendings = _dbContext.Attendances.ToList();
             return View(viewModel);
         }
 
