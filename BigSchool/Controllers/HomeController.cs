@@ -30,6 +30,7 @@ namespace BigSchool.Controllers
                 ShowAction = User.Identity.IsAuthenticated
             };
             ViewBag.Attendings = _dbContext.Attendances.ToList();
+            ViewBag.Followings = _dbContext.Followings.ToList();
             return View(viewModel);
         }
 

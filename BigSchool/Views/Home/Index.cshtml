@@ -3,7 +3,8 @@
 
 @{
     ViewBag.Title = "Home Page";
-    var attendings = (IEnumerable<BigSchool.Models.Attendance>)ViewBag.Attendings;
+    var attendings = (List<BigSchool.Models.Attendance>)ViewBag.Attendings;
+    var followings = (List<BigSchool.Models.Following>)ViewBag.Followings;
 }
 
 <h1>The Big School</h1>
@@ -27,11 +28,22 @@
                         @course.Lecturer.Name
                         @if (Model.ShowAction)
                         {
-
-                            <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
+                            int check = 0;
+                            foreach (var item in followings)
+                            {
+                                if (course.LecturerId == item.FolloweeId && User.Identity.GetUserId() == item.FollowerId)
+                                {
+                                    <button data-user-id="@course.LecturerId" class="btn btn-info btn-sm js-toggle-follow">Following</button>
+                                    check = 1;
+                                    break;
+                                }
+                            }
+                            if (check == 0)
+                            {
+                                <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
+                            }
                         }
                     </span>
-                    -
                     <span class="category">
                         @course.Category.Name
                     </span>
@@ -77,7 +89,10 @@
                     var button = $(e.target);
                     $.post("/api/followings", { followeeId: button.attr("data-user-id") })
                         .done(function () {
-                            button.text("Following");
+                            button
+                                .removeClass("btn-default")
+                                .addClass("btn-info")
+                                .text("Following");
                         })
                         .fail(function () {
                             alert("Sth failed!");
