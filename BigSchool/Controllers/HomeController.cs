@@ -34,6 +34,26 @@ namespace BigSchool.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult Search(string searchStr)
+        {
+            var upcomingCourses = _dbContext.Courses
+               .Include(c => c.Lecturer)
+               .Include(c => c.Category)
+               .Where(c => c.DateTime > DateTime.Now && c.IsCanceled == false && c.Lecturer.Name.Contains(searchStr)
+               || c.Place.Contains(searchStr) && c.DateTime > DateTime.Now && c.IsCanceled == false
+               || c.Category.Name.Contains(searchStr) && c.DateTime > DateTime.Now && c.IsCanceled == false);
+            var viewModel = new CoursesViewModel
+            {
+                UpcomingCourses = upcomingCourses,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+            ViewBag.Attendings = _dbContext.Attendances.ToList();
+            ViewBag.Followings = _dbContext.Followings.ToList();
+            return View("Index", viewModel);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
