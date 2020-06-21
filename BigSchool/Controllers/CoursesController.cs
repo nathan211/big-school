@@ -68,14 +68,17 @@ namespace BigSchool.Controllers
                 UpcomingCourses = courses,
                 ShowAction = User.Identity.IsAuthenticated
             };
+            ViewBag.Attendings = _dbContext.Attendances.ToList();
+            ViewBag.Followings = _dbContext.Followings.ToList();
             return View(viewModel);
         }
 
+        [Authorize]
         public ActionResult Mine()
         {
             var userId = User.Identity.GetUserId();
             var courses = _dbContext.Courses
-                .Where(c => c.LecturerId == userId && c.DateTime > DateTime.Now)
+                .Where(c => c.LecturerId == userId && c.DateTime > DateTime.Now && c.IsCanceled == false)
                 .Include(l => l.Lecturer)
                 .Include(c => c.Category)
                 .ToList();

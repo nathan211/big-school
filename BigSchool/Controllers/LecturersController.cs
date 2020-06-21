@@ -37,6 +37,7 @@ namespace BigSchool.Controllers
                 UpcomingLecturers = lecturers,
                 ShowAction = User.Identity.IsAuthenticated
             };
+            ViewBag.Followings = _dbContext.Followings.ToList();
             return View(viewModel);
         }
     }
