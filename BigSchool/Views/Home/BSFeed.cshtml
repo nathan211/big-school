@@ -3,8 +3,9 @@
 
 @{
     ViewBag.Title = "Big School";
-    var attendings = (List<BigSchool.Models.Attendance>)ViewBag.Attendings;
     var followings = (List<BigSchool.Models.Following>)ViewBag.Followings;
+    var attendings = (List<BigSchool.Models.Attendance>)ViewBag.Attendings;
+    var followees = (List<BigSchool.Models.Following>)ViewBag.Followees;
 }
 
 <br />
@@ -33,64 +34,69 @@
     <ul class="course">
         @foreach (var course in Model.UpcomingCourses)
         {
-            <li>
-                <div class="date">
-                    <div class="month">
-                        @course.DateTime.ToString("MM")
-                    </div>
-                    <div class="day">
-                        @course.DateTime.ToString("dd")
-                    </div>
-                </div>
-                <div class="details">
-                    <span class="lecturer">
-                        @course.Lecturer.Name
-                        @if (Model.ShowAction)
-                        {
-                            int check = 0;
-                            foreach (var item in followings)
-                            {
-                                if (course.LecturerId == item.FolloweeId && User.Identity.GetUserId() == item.FollowerId)
+            foreach (var lecturer in followees)
+            {
+                if (course.LecturerId == lecturer.FolloweeId)
+                {
+                    <li>
+                        <div class="date">
+                            <div class="month">
+                                @course.DateTime.ToString("MM")
+                            </div>
+                            <div class="day">
+                                @course.DateTime.ToString("dd")
+                            </div>
+                        </div>
+                        <div class="details">
+                            <span class="lecturer">
+                                @course.Lecturer.Name
+                                @if (Model.ShowAction)
                                 {
-                                    <button data-user-id="@course.LecturerId" class="btn btn-info btn-sm js-toggle-follow following">Following</button>
-                                    check = 1;
-                                    break;
+                                    int check = 0;
+                                    foreach (var item in followings)
+                                    {
+                                        if (course.LecturerId == item.FolloweeId && User.Identity.GetUserId() == item.FollowerId)
+                                        {
+                                            <button data-user-id="@course.LecturerId" class="btn btn-info btn-sm js-toggle-follow following">Following</button>
+                                            check = 1;
+                                            break;
+                                        }
+                                    }
+                                    if (check == 0)
+                                    {
+                                        <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
+                                    }
                                 }
-                            }
-                            if (check == 0)
-                            {
-                                <button data-user-id="@course.LecturerId" class="btn btn-default btn-sm js-toggle-follow">Follow</button>
-                            }
-                        }
-                    </span>
-                    -
-                    <span class="category">
-                        @course.Category.Name
-                        @if (Model.ShowAction)
-                        {
-                            int check = 0;
-                            foreach (var item in attendings)
-                            {
-                                if (course.Id == item.CourseId && User.Identity.GetUserId() == item.AttendeeId)
+                            </span>
+                            -
+                            <span class="category">
+                                @course.Category.Name
+                                @if (Model.ShowAction)
                                 {
-                                    <button data-course-id="@course.Id" class="btn btn-info btn-sm js-toggle-attendance going">Going</button>
-                                    check = 1;
-                                    break;
+                                    int check = 0;
+                                    foreach (var item in attendings)
+                                    {
+                                        if (course.Id == item.CourseId && User.Identity.GetUserId() == item.AttendeeId)
+                                        {
+                                            <button data-course-id="@course.Id" class="btn btn-info btn-sm js-toggle-attendance going">Going</button>
+                                            check = 1;
+                                            break;
+                                        }
+                                    }
+                                    if (check == 0)
+                                    {
+                                        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                                    }
                                 }
-                            }
-                            if (check == 0)
-                            {
-                                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
-                            }
-                        }
-                    </span>
-                    &nbsp;
-                    |
-                    &nbsp;
-                    <a href="@Url.Action("Details", "Courses", new { id = course.Id })">Details <i class="glyphicon glyphicon-share-alt"></i></a>
-                </div>
-            </li>
-            
+                            </span>
+                            &nbsp;
+                            |
+                            &nbsp;
+                            <a href="@Url.Action("Details", "Home")">Details <i class="glyphicon glyphicon-share-alt"></i></a>
+                        </div>
+                    </li>
+                }
+            }
         }
     </ul>
     @section scripts

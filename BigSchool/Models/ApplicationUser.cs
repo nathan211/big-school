@@ -14,6 +14,7 @@ namespace BigSchool.Models
     {
         [Required]
         [StringLength(255)]
+        [Display(Name = "Lecturer")]
         public string Name { get; set; }
 
         public ICollection<Following> Followers { get; set; }

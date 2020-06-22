@@ -11,6 +11,7 @@ namespace BigSchool.Models
         public byte Id { get; set; }
         [Required]
         [StringLength(255)]
+        [Display(Name = "Category")]
         public string Name { get; set; }
     }
 }
